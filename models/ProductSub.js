@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { transliterate, slugify } = require("transliteration");
 const { ObjectId } = mongoose.Schema;
 const productSubSchema = new mongoose.Schema(
   {
@@ -18,12 +17,7 @@ const productSubSchema = new mongoose.Schema(
       minlength: [3, "too short"],
       maxlength: [100, "Too Long"],
     },
-    slug: {
-      type: String,
-      lowercase: true,
-      index: true,
-      unique: true,
-    },
+
     parent: {
       type: ObjectId,
       ref: "ProductCategory",
@@ -34,12 +28,5 @@ const productSubSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-productSubSchema.pre("save", function (next) {
-  this.slug = slugify(this.name, { lower: true });
-  this.tr = transliterate(this.name);
-  next();
-});
-
-productSubSchema.plugin(require("mongoose-autopopulate"));
 
 module.exports = mongoose.model("ProductSub", productSubSchema);

@@ -5,8 +5,6 @@ const {
   addCategory,
 } = require("../controllers/categories");
 
-
-asdasd
 const catrouter = express.Router();
 
 catrouter.route("/").get(getAllProductCategory).post(addCategory);

@@ -22,7 +22,7 @@ connectDB();
 
 // // //Route files
 const category = require("./routes/category");
-// // const courses = require('./routes/courses');
+const subs = require("./routes/subCategory");
 // // const auth = require('./routes/auth');
 // // const users = require('./routes/users');
 // // const reviews = require('./routes/reviews');
@@ -75,11 +75,12 @@ app.use(cors());
 
 // // // Mount routers
 app.use("/api/v1/cat", category);
-// // app.use('/api/v1/courses', courses);
+app.use("/api/v1/sub", subs);
 // // app.use('/api/v1/auth', auth);
 // // app.use('/api/v1/users', users);
 // // app.use('/api/v1/reviews', reviews);
 app.use(errorHandler);
+
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(
