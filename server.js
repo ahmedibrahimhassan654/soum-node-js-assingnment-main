@@ -23,7 +23,7 @@ connectDB();
 // // //Route files
 const category = require("./routes/category");
 const subs = require("./routes/subCategory");
-// // const auth = require('./routes/auth');
+const product = require("./routes/product");
 // // const users = require('./routes/users');
 // // const reviews = require('./routes/reviews');
 
@@ -76,7 +76,7 @@ app.use(cors());
 // // // Mount routers
 app.use("/api/v1/cat", category);
 app.use("/api/v1/sub", subs);
-// // app.use('/api/v1/auth', auth);
+app.use("/api/v1/product", product);
 // // app.use('/api/v1/users', users);
 // // app.use('/api/v1/reviews', reviews);
 app.use(errorHandler);

@@ -7,21 +7,17 @@ const Product = require("../models/Product");
 // @access    Public
 exports.getAllProducts = asyncHandler(async (req, res, next) => {
   const products = await Product.find()
-    .limit(parseInt(req.params.count))
-
     .populate("category")
     .populate("subs")
-    .populate("cratedBy")
-    .sort([["createdAt", "desc"]])
     .exec();
 
   res.status(200).json({ success: true, data: products });
 });
 
-// @desc      Create new bootcamp
-// @route     POST /api/v1/bootcamps
+// @desc      Create new product
+// @route     POST /api/v1/product
 // @access    puplic
-exports.create = asyncHandler(async (req, res, next) => {
+exports.addProduct = asyncHandler(async (req, res, next) => {
   const product = await Product.create(req.body);
 
   res.status(201).json({

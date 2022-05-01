@@ -18,16 +18,24 @@ const ProductSchema = new mongoose.Schema(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ProductCategory",
+      required: true,
     },
     subs: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "ProductSub",
+        required: true,
       },
     ],
 
     image: {
       type: String,
+      default: "no-image.jpg",
+    },
+    productstate: {
+      type: String,
+      enum: ["available", "draft", "sold", "deleted", "reserved", "expired"],
+      default: "available",
     },
   },
   { timestamps: true }
