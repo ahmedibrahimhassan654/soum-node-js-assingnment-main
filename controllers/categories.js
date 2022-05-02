@@ -37,10 +37,10 @@ exports.getProductCategory = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/category
 // @access    Private
 exports.addCategory = asyncHandler(async (req, res, next) => {
-  const category = await ProductCategory.create(req.body);
+  const category = await ProductCategory.create();
 
-  res.status(200).json({
-    success: true,
-    data: category,
-  });
+  // res.status(200).json({
+  //   success: true,
+  //   data: category,
+  // });
 });
