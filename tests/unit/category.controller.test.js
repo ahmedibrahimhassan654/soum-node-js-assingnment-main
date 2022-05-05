@@ -12,19 +12,26 @@ beforeEach(() => {
 });
 
 describe("Category Controller", () => {
+  beforeEach(() => {
+    req.body = categoryMock;
+  });
+
   it("should have add category function", () => {
     expect(typeof categoryController.addCategory).toBe("function");
   });
   it("should create category scema model ", async () => {
-    req.body = categoryMock;
     await categoryController.addCategory(req, res, next);
     expect(categoryModel.create).toBeCalledWith(categoryMock);
   });
 
   it("should return response 200 ", async () => {
-    req.body = categoryMock;
     await categoryController.addCategory(req, res, next);
     expect(res.statusCode).toBe(200);
     expect(res._isEndCalled()).toBeTruthy();
+  });
+  it("should return json body in response ", async () => {
+    await categoryModel.create.mockReturnValue(categoryMock);
+    await categoryController.addCategory(req, res, next);
+    expect(res._getJSONData()).toStrictEqual(categoryMock);
   });
 });
