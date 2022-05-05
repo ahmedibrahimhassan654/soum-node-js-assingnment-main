@@ -20,4 +20,11 @@ describe("Category Controller", () => {
     await categoryController.addCategory(req, res, next);
     expect(categoryModel.create).toBeCalledWith(categoryMock);
   });
+
+  it("should return response 200 ", async () => {
+    req.body = categoryMock;
+    await categoryController.addCategory(req, res, next);
+    expect(res.statusCode).toBe(200);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
 });
