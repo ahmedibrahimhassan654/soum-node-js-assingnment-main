@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "prod": "NODE_ENV=production node server",
-    "dev": "nodemon server.js",
-    "test": "jest --watchAll"
+    "dev": "NODE_ENV=development nodemon server.js",
+    "test": "NODE_ENV=test jest --watchAll"
   },
   "author": "Ahmed Ibrahim",
   "license": "MIT",
