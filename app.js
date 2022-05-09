@@ -28,8 +28,6 @@ const category = require("./routes/category");
 const subs = require("./routes/subCategory");
 const product = require("./routes/product");
 
-
-
 //Body parser
 app.use(express.json());
 
@@ -72,4 +70,7 @@ app.use("/api/v1/product", product);
 // // app.use('/api/v1/reviews', reviews);
 app.use(errorHandler);
 
+app.use((error, req, res, next) => {
+  res.status(500).json({ message: error.message });
+});
 module.exports = app;

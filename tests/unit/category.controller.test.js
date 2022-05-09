@@ -24,9 +24,9 @@ describe("Category Controller", () => {
     expect(categoryModel.create).toBeCalledWith(categoryMock);
   });
 
-  it("should return response 200 ", async () => {
+  it("should return response 201 ", async () => {
     await categoryController.addCategory(req, res, next);
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
     expect(res._isEndCalled()).toBeTruthy();
   });
   it("should return json body in response ", async () => {

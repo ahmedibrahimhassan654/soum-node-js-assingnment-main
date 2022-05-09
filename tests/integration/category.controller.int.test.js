@@ -7,8 +7,23 @@ const endpointUrl = "/api/v1/cat/";
 describe(endpointUrl, () => {
   it("create new cat " + endpointUrl, async () => {
     const response = await request(app).post(endpointUrl).send(catModel);
-    // expect(response.statusCode).toBe(200);
-
-    console.log(response.body);
+    if (response.statusCode === 201) {
+      expect(response.body).toStrictEqual(catModel);
+    } else if (response.statusCode === 400) {
+      expect(response.error).toBeDefined();
+    }
   });
+  it(
+    "should return error 400 on malformed data with POST" + endpointUrl,
+    async () => {
+      const response = await request(app)
+        .post(endpointUrl)
+        .send({ title: "Missing done property" });
+      expect(response.statusCode).toBe(400);
+      expect(response.body).toStrictEqual({
+        error: "please add  category description,please add an category name",
+        success: false,
+      });
+    }
+  );
 });
