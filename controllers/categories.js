@@ -9,9 +9,7 @@ const ProductCategory = require("../models/ProductCategory");
 // @access    Public
 exports.getAllProductCategory = asyncHandler(async (req, res, next) => {
   const categories = await ProductCategory.find({});
-  res
-    .status(200)
-    .json({ message: "success", num: categories.length, data: categories });
+  res.status(200).json(categories);
 });
 
 // @desc      Get single category

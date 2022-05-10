@@ -2,8 +2,9 @@ const categoryController = require("../../controllers/categories");
 const categoryModel = require("../../models/ProductCategory");
 const httpMocks = require("node-mocks-http");
 const categoryMock = require("../mock-data/newcategory.json");
+const allCategory = require("../mock-data/allcategories.json");
 categoryModel.create = jest.fn();
-
+categoryModel.find = jest.fn();
 let req, res, next;
 beforeEach(() => {
   req = httpMocks.createRequest();
@@ -46,5 +47,17 @@ describe("Category Controller add category", () => {
 describe("Category Controller get all categories", () => {
   it("should have get all categories function", () => {
     expect(typeof categoryController.getAllProductCategory).toBe("function");
+  });
+  it("should called categoryModel.find({})", async () => {
+    await categoryController.getAllProductCategory(req, res, next);
+    expect(categoryModel.find).toHaveBeenCalledWith({});
+  });
+
+  it("should return response 200 ", async () => {
+    await categoryModel.find.mockReturnValue(allCategory);
+    await categoryController.getAllProductCategory(req, res, next);
+    expect(res.statusCode).toBe(200);
+    expect(res._isEndCalled()).toBeTruthy();
+    expect(res._getJSONData()).toStrictEqual(allCategory);
   });
 });
