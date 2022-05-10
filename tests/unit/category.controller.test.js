@@ -11,7 +11,7 @@ beforeEach(() => {
   next = jest.fn();
 });
 
-describe("Category Controller", () => {
+describe("Category Controller add category", () => {
   beforeEach(() => {
     req.body = categoryMock;
   });
@@ -40,5 +40,11 @@ describe("Category Controller", () => {
     categoryModel.create.mockReturnValue(rejectedPromise);
     await categoryController.addCategory(req, res, next);
     expect(next).toBeCalledWith(errorMessage);
+  });
+});
+
+describe("Category Controller get all categories", () => {
+  it("should have get all categories function", () => {
+    expect(typeof categoryController.getAllProductCategory).toBe("function");
   });
 });

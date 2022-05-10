@@ -43,6 +43,6 @@ exports.addCategory = asyncHandler(async (req, res, next) => {
     res.status(201).json(category);
   } catch (err) {
     next(err);
-    console.log(err._message);
+    // console.log(err._message);
   }
 });

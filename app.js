@@ -70,7 +70,7 @@ app.use("/api/v1/product", product);
 // // app.use('/api/v1/reviews', reviews);
 app.use(errorHandler);
 
-app.use((error, req, res, next) => {
-  res.status(500).json({ message: error.message });
-});
+// app.use((error, req, res, next) => {
+//   res.status(500).json({ message: error.message });
+// });
 module.exports = app;
