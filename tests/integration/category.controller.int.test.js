@@ -1,10 +1,16 @@
 const request = require("supertest");
 const app = require("../../app");
 const catModel = require("../mock-data/newcategory.json");
-
+const allcate = require("../mock-data/allcategories.json");
 const endpointUrl = "/api/v1/cat/";
 
 describe(endpointUrl, () => {
+  test("get" + endpointUrl, async () => {
+    const response = await request(app).get(endpointUrl);
+    expect(response.statusCode).toBe(200);
+    expect(Array.isArray(response.body)).toBeTruthy();
+  });
+
   it("create new cat " + endpointUrl, async () => {
     const response = await request(app).post(endpointUrl).send(catModel);
     if (response.statusCode === 201) {
