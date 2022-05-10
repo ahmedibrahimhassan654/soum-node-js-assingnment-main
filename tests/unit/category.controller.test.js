@@ -60,4 +60,11 @@ describe("Category Controller get all categories", () => {
     expect(res._isEndCalled()).toBeTruthy();
     expect(res._getJSONData()).toStrictEqual(allCategory);
   });
+  it("should handle errors", async () => {
+    const errorMessage = { message: "error finding" };
+    const rejectedPromise = Promise.reject(errorMessage);
+    categoryModel.find.mockReturnValue(rejectedPromise);
+    await categoryController.getAllProductCategory(req, res, next);
+    expect(next).toHaveBeenCalledWith(errorMessage);
+  });
 });
