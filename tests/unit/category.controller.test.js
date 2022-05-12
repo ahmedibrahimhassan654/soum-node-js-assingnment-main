@@ -5,6 +5,7 @@ const categoryMock = require("../mock-data/newcategory.json");
 const allCategory = require("../mock-data/allcategories.json");
 categoryModel.create = jest.fn();
 categoryModel.find = jest.fn();
+categoryModel.findById = jest.fn();
 let req, res, next;
 beforeEach(() => {
   req = httpMocks.createRequest();
@@ -66,5 +67,15 @@ describe("Category Controller get all categories", () => {
     categoryModel.find.mockReturnValue(rejectedPromise);
     await categoryController.getAllProductCategory(req, res, next);
     expect(next).toHaveBeenCalledWith(errorMessage);
+  });
+});
+describe("Category Controller get category by id", () => {
+  it("should have get category by id function", () => {
+    expect(typeof categoryController.getProductCategory).toBe("function");
+  });
+  it("should called categoryModel.findById({})", async () => {
+    req.params.id = "5e9f8f8f8f8f8f8f8f8f8f8";
+    await categoryController.getProductCategory(req, res, next);
+    expect(categoryModel.findById).toHaveBeenCalledWith(req.params.id);
   });
 });
