@@ -29,10 +29,7 @@ exports.getProductCategory = asyncHandler(async (req, res, next) => {
     );
   }
 
-  res.status(200).json({
-    success: true,
-    data: category,
-  });
+  res.status(200).json(category);
 });
 
 // @desc      Add category

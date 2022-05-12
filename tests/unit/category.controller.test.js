@@ -78,4 +78,12 @@ describe("Category Controller get category by id", () => {
     await categoryController.getProductCategory(req, res, next);
     expect(categoryModel.findById).toHaveBeenCalledWith(req.params.id);
   });
+  it("should return response 200 ", async () => {
+    await categoryModel.findById.mockReturnValue(categoryMock);
+
+    await categoryController.getProductCategory(req, res, next);
+    expect(res.statusCode).toBe(200);
+    expect(res._getJSONData()).toStrictEqual(categoryMock);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
 });
