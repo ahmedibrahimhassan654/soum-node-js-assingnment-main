@@ -14,6 +14,9 @@ const cors = require("cors");
 const errorHandler = require("./middleware/error");
 const connectDB = require("./config/db");
 const { readdirSync } = require("fs");
+const { graphqlHTTP } = require("express-graphql");
+const graphQlSchema = require("./graphql/schema/index");
+const graphQlResolvers = require("./graphql/resolver/index");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
@@ -66,8 +69,17 @@ app.use(cors());
 app.use("/api/v1/cat", category);
 app.use("/api/v1/sub", subs);
 app.use("/api/v1/product", product);
-// // app.use('/api/v1/users', users);
-// // app.use('/api/v1/reviews', reviews);
+
+//install grapql
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: graphQlSchema,
+    rootValue: graphQlResolvers,
+    graphiql: true,
+  })
+);
+
 app.use(errorHandler);
 
 // app.use((error, req, res, next) => {
