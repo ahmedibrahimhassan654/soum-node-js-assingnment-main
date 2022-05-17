@@ -8,7 +8,6 @@ const productSubSchema = new mongoose.Schema(
       required: [true, "please add an category name"],
       minlength: [3, "too short"],
       maxlength: [100, "Too Long"],
-      unique: true,
     },
     description: {
       type: String,
@@ -22,11 +21,9 @@ const productSubSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "ProductCategory",
       required: true,
-      autopopulate: { select: "_id name", maxDepth: 1 },
     },
   },
   { timestamps: true }
 );
-
 
 module.exports = mongoose.model("ProductSub", productSubSchema);

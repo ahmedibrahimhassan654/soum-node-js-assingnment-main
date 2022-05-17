@@ -20,7 +20,8 @@ type SubCategory {
 input SubCategoryInput {
     name: String!
     description: String!
-    parent: Category!
+    parent: String!
+
 }
 type RootQuery {
     categories: [Category!]!
