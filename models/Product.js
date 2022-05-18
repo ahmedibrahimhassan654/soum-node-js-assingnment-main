@@ -15,18 +15,6 @@ const ProductSchema = new mongoose.Schema(
       trim: true,
       maxlength: [32, "price can not be more than 32 characters"],
     },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductCategory",
-      required: true,
-    },
-    subs: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "ProductSub",
-        required: true,
-      },
-    ],
 
     image: {
       type: String,
@@ -34,8 +22,16 @@ const ProductSchema = new mongoose.Schema(
     },
     productstate: {
       type: String,
-      enum: ["available", "draft", "sold", "deleted", "reserved", "expired"],
+      enum: ["available", "draft"],
       default: "available",
+    },
+    payment: {
+      type: String,
+      enum: ["reserved", "sold", "returned"],
+    },
+    paymentSucess: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
