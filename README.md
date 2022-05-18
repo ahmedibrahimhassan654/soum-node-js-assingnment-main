@@ -26,6 +26,15 @@ npm run test
 
 ```
 
+ <p> to run Graph Ql Api or run swager documentation you have to run server first<p>
+
+```
+npm run dev
+
+```
+
+---
+
 # Technologies used
 
 This node js back end server build for web application
@@ -52,6 +61,10 @@ and make **integration test** using **Jest**
 ### [Github Link](https://github.com/ahmedibrahimhassan654/soum-node-js-assingnment-main)
 
 ### [Gitlab Link](https://gitlab.com/ahmedibrahim5588/soum-node-js-assingnment-main)
+
+### [GraphQl Server](http://localhost:5000/graphql)
+
+### [swager documentation](http://localhost:5000/api-docs/)
 
 ---
 
