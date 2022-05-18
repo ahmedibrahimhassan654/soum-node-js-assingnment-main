@@ -38,7 +38,7 @@ and make **integration test** using **Jest**
 
 > - **Node Js** ,
 > - **Express Js**,
-> - **Mongo Db**,
+> - **Mongo Db** (build in local ),
 > - **RestApi** ,**GraphQl** ,
 > - **swager** , **post man** ,
 > - **integration test** using **Jest**
