@@ -17,6 +17,9 @@ const { readdirSync } = require("fs");
 const { graphqlHTTP } = require("express-graphql");
 const graphQlSchema = require("./graphql/schema/index");
 const graphQlResolvers = require("./graphql/resolver/index");
+
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
@@ -69,6 +72,53 @@ app.use(cors());
 app.use("/api/v1/cat", category);
 app.use("/api/v1/sub", subs);
 app.use("/api/v1/product", product);
+//swager documentation
+//swager options
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "soum project",
+      version: "1.0.0",
+      description:
+        "soum interview backend server build with node js and mongo db using rest api and qrapql ",
+      contact: {
+        name: "Ahmed Ibrahim",
+        url: "https://my-portofolio-swart.vercel.app",
+        email: "ahmedibrahimhassan654@gmail.com",
+      },
+    },
+
+    servers: [
+      {
+        url: "http://localhost:5000/api/v1",
+        description: "Development server",
+      },
+      {
+        url: "production url server",
+        description: "Production server",
+      },
+    ],
+
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+const specs = swaggerJsDoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 //install grapql
 app.use(
